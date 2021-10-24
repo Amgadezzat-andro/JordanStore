@@ -81,6 +81,10 @@ Route::group(
 
         //Units
         Route::get('units', 'App\HTTP\Controllers\UnitController@index')->name('units');
+
+        Route::post('units', 'App\HTTP\Controllers\UnitController@store');
+
+
         //  Route::get('add-unit', 'App\HTTP\Controllers\UnitController@showAdd')->name('new-unit');
 
 
