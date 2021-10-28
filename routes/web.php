@@ -80,12 +80,16 @@ Route::group(
     function () {
 
         //Units
+
+        //Get  Unit Data
         Route::get('units', 'App\HTTP\Controllers\UnitController@index')->name('units');
-
+        //Post Add Unit
         Route::post('units', 'App\HTTP\Controllers\UnitController@store');
+        // Delete Unit
+        Route::delete('units', 'App\HTTP\Controllers\UnitController@delete');
+        //Update Unit
+        Route::put('units', 'App\HTTP\Controllers\UnitController@update');
 
-
-        //  Route::get('add-unit', 'App\HTTP\Controllers\UnitController@showAdd')->name('new-unit');
 
 
         // Categories

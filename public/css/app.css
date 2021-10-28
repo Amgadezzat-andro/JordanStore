@@ -10002,3 +10002,34 @@ h3 {
     border-color: #dee2e6;
   }
 }
+.navbar-laravel {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.delete-btn {
+  -webkit-appearance: none;
+  background-color: transparent;
+  border: none;
+  color: red;
+  position: absolute;
+  right: 5px;
+}
+
+span.button-span {
+  position: absolute;
+  right: 15px;
+  bottom: 5px;
+}
+
+span.button-span span:first-child {
+  margin-right: 10px;
+}
+
+span.button-span span:first-child a {
+  color: #1fca1f;
+}
+
+span.button-span span:last-child a {
+  color: #eb4444;
+}
