@@ -34,13 +34,25 @@ class UnitController extends Controller
     // from the view
     public function store(Request $request)
     {
-        //TODO check if the unit already exisits
 
         // validate the data
         $request->validate([
             'unit_name' => 'required',
             'unit_code' => 'required',
         ]);
+
+        //Check unit name & unit code still exists
+
+        $unitName = $request->input('unit_name');
+        $unitCode = $request->input('unit_code');
+
+        if (!$this->unitNameExists($unitName)) {
+            return redirect()->back();
+        }
+        if (!$this->unitCodeExists($unitCode)) {
+            return redirect()->back();
+        }
+
 
         // make new Data Model object
         $unit = new Unit();
@@ -61,25 +73,76 @@ class UnitController extends Controller
     public function update(Request $request)
     {
         //dd($request);
-        //TODO update the given unit
+
         $request->validate([
             'unit_code' => 'required',
             'unit_id' => 'required',
             'unit_name' => 'required',
         ]);
+
+
+        //Check unit name & unit code exists
+
+        $unitName = $request->input('unit_name');
+        $unitCode = $request->input('unit_code');
+
+        if (!$this->unitNameExists($unitName)) {
+            return redirect()->back();
+        }
+        if (!$this->unitCodeExists($unitCode)) {
+            return redirect()->back();
+        }
+
+
+
         $unitId = intval($request->input('unit_id'));
         $unit = Unit::find($unitId);
 
         $unit->unit_name = $request->input('unit_name');
         $unit->unit_code = $request->input('unit_code');
         $unit->save();
-        Session::flash('message', 'Unit '.$unit->unit_name.' has been updated');
+        Session::flash('message', 'Unit ' . $unit->unit_name . ' has been updated');
         return redirect()->back();
     }
 
     public function search(Request $request)
     {
         //TODO Add Unit Search
+    }
+
+
+    private function unitNameExists($unitName)
+    {
+        // check if unit name exists in database and return first item
+        $unit = Unit::where(
+            'unit_name',
+            '=',
+            $unitName,
+        )->first();
+
+        if (!is_null($unit)) {
+            Session::flash('message', 'Unit Name (' . $unitName . ') already exists');
+            return false;
+        }
+
+        return true;
+    }
+
+    private function unitCodeExists($unitCode)
+    {
+        $unit = Unit::where(
+            'unit_code',
+            '=',
+            $unitCode,
+        )->first();
+
+
+
+        if (!is_null($unit)) {
+            Session::flash('message', 'Unit Code (' . $unitCode . ') already exists');
+            return false;
+        }
+        return true;
     }
 
     public function delete(Request $request)
