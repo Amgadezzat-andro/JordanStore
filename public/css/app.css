@@ -10033,3 +10033,7 @@ span.button-span span:first-child a {
 span.button-span span:last-child a {
   color: #eb4444;
 }
+
+#search_button {
+  margin-top: 30px;
+}

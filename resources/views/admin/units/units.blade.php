@@ -79,7 +79,26 @@
                             @endforeach
                         </div>
 
-                        {{ $units->links() }}
+                        {{-- {{ ($units instanceof LengthAwarePaginator ) ? $units->links() : ''}} --}}
+                        {{ (!is_null($showLinks) && $showLinks) ? $units->links() : '' }}
+
+                        <form action="{{ route('search-units') }}" method="POST">
+                            @csrf
+                            <div class="row">
+
+                                <div class="form-group col-md-6">
+                                    <label for="unit_search">Search</label>
+                                    <input type="text" class="form-control" id="unit_search" name="unit_search"
+                                        placeholder="Search Unit" required>
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <button type="submit" class="btn btn-primary" id="search_button">Search</button>
+                                </div>
+
+                            </div>
+                        </form>
+
 
                     </div>
 
@@ -141,19 +160,17 @@
 
                         <div class="form-group col-md-6">
                             <label for="edit_unit_text">Unit Name</label>
-                            <input type="text" class="form-control"
-                            id="edit_unit_name" name="unit_name"
+                            <input type="text" class="form-control" id="edit_unit_name" name="unit_name"
                                 placeholder="Unit Name" required>
                         </div>
 
                         <div class="form-group col-md-6">
                             <label for="edit_unit_code">Unit Code</label>
-                            <input type="text" class="form-control"
-                            id="edit_unit_code" name="unit_code"
+                            <input type="text" class="form-control" id="edit_unit_code" name="unit_code"
                                 placeholder="Unit Code" required>
                         </div>
 
-                        <input type="hidden" name="_method" value="PUT"/>
+                        <input type="hidden" name="_method" value="PUT" />
                         <input type="hidden" name="unit_id" id="edit_unit_id">
 
 
@@ -234,7 +251,7 @@
 
 
 
-                // EDIT WINDOW
+            // EDIT WINDOW
             // store button in variable
             var $editUnit = $('.edit-unit');
             // store modal in variable

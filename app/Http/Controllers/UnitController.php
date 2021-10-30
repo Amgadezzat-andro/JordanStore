@@ -25,7 +25,11 @@ class UnitController extends Controller
         //$units = Unit::all();
         //instead of using all data from database
         $units = Unit::orderby('unit_code')->paginate(env("PAGINATION_COUNT"));
-        echo view('admin.units.units')->with(['units' => $units]);
+        echo view('admin.units.units')->with([
+
+            'units' => $units,
+            'showLinks' => true,
+        ]);
     }
 
 
@@ -107,7 +111,38 @@ class UnitController extends Controller
 
     public function search(Request $request)
     {
-        //TODO Add Unit Search
+
+        // make sure not post empty form
+        $request->validate([
+            'unit_search' => 'required'
+        ]);
+        // get search term from unit-name from unit blade
+        $searchTerm = $request->input('unit_search');
+
+        // get units filled by searching something like search term
+        $units = Unit::where(
+            'unit_name',
+            'LIKE',
+            '%' . $searchTerm . '%'
+        )->orWhere(
+            'unit_code',
+            'LIKE',
+            '%' . $searchTerm . '%',
+        )->get();
+
+        // dd($units);
+
+        // if there are units exists from search return view with new data
+        if (count($units) > 0) {
+            return view('admin.units.units')->with([
+                'units' => $units,
+                'showLinks' => false,
+            ]);
+        }
+
+        Session::flash('message', 'Nothing found!!');
+
+        return redirect()->back();
     }
 
 

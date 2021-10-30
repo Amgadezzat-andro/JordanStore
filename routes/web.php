@@ -89,6 +89,10 @@ Route::group(
         Route::delete('units', 'App\HTTP\Controllers\UnitController@delete');
         //Update Unit
         Route::put('units', 'App\HTTP\Controllers\UnitController@update');
+        // Search for unit
+        // laravel knows that this will be dynamic value
+        Route::post('search-unit', 'App\HTTP\Controllers\UnitController@search')->name('search-units');
+
 
 
 
@@ -128,7 +132,5 @@ Route::group(
 
         //Roles
         Route::get('roles', 'App\HTTP\Controllers\RoleController@index')->name('roles');
-
-
     }
 );
