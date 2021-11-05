@@ -103,8 +103,11 @@ Route::group(
         //Products
         Route::get('products', 'App\HTTP\Controllers\ProductController@index')->name('products');
 
+
         //Tags
         Route::get('tags', 'App\HTTP\Controllers\TagController@index')->name('tags');
+        Route::post('tags', 'App\HTTP\Controllers\TagController@store');
+
 
 
         //Payments
