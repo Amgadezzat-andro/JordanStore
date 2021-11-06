@@ -98,7 +98,10 @@ Route::group(
 
         // Categories
         Route::get('categories', 'App\HTTP\Controllers\CategoryController@index')->name('categories');
-
+        Route::post('categories', 'App\HTTP\Controllers\CategoryController@store');
+        Route::delete('categories', 'App\HTTP\Controllers\CategoryController@delete');
+        Route::get('search-categories', 'App\HTTP\Controllers\CategoryController@search')->name('search-categories');
+        Route::put('categories', 'App\HTTP\Controllers\CategoryController@update');
 
         //Products
         Route::get('products', 'App\HTTP\Controllers\ProductController@index')->name('products');

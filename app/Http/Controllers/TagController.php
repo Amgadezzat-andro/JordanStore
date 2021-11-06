@@ -30,6 +30,11 @@ class TagController extends Controller
         // get tag_name from request
         $tagName = $request->input('tag_name');
 
+        if (!$this->tagNameExists($tagName)) {
+            Session::flash('message', 'Tag name already exists');
+            return redirect()->back();
+        }
+
         // search for identical tags
         // it will return as collection
         $tag = Tag::where('tag', '=', $tagName)->get();
@@ -102,7 +107,7 @@ class TagController extends Controller
         )->first();
 
         if (!is_null($tag)) {
-            Session::flash('message', 'Tag Name (' . $tagName . ') already exists');
+           // Session::flash('message', 'Tag Name (' . $tagName . ') already exists');
             return false;
         }
 
