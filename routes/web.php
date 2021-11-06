@@ -91,7 +91,7 @@ Route::group(
         Route::put('units', 'App\HTTP\Controllers\UnitController@update');
         // Search for unit
         // laravel knows that this will be dynamic value
-        Route::post('search-unit', 'App\HTTP\Controllers\UnitController@search')->name('search-units');
+        Route::get('search-unit', 'App\HTTP\Controllers\UnitController@search')->name('search-units');
 
 
 
@@ -107,6 +107,10 @@ Route::group(
         //Tags
         Route::get('tags', 'App\HTTP\Controllers\TagController@index')->name('tags');
         Route::post('tags', 'App\HTTP\Controllers\TagController@store');
+        Route::delete('tags', 'App\HTTP\Controllers\TagController@delete');
+        Route::get('search-tags', 'App\HTTP\Controllers\TagController@search')->name('search-tags');
+        Route::put('tags', 'App\HTTP\Controllers\TagController@update');
+
 
 
 
