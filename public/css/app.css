@@ -10037,3 +10037,13 @@ span.button-span span:last-child a {
 #search_button {
   margin-top: 30px;
 }
+
+span.product-header-title {
+  color: #030fb3;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+a.remove-option {
+  color: #eb4444;
+}

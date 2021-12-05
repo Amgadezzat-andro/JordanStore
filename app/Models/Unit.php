@@ -13,4 +13,12 @@ class Unit extends Model
 
         'unit_code', 'unit_name'
     ];
+
+    public function products(){
+        return $this->hasMany(Product::class,'id','unit');
+    }
+
+    public function formatted(){
+        return $this->unit_name .' - '. $this->unit_code;
+    }
 }

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
+use App\Models\Unit;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -21,5 +23,37 @@ class ProductController extends Controller
                 'currency_code' => $currencyCode,
             ]
         );
+    }
+
+    public function newProduct($id = null)
+    {
+
+
+        $product = null;
+        if (!is_null($id)) {
+            $product = Product::with([
+                'hasUnit',
+                'category'
+            ])->find($id);
+        }
+
+        $units = Unit::all();
+        $categories = Category::all();
+        return view('admin.products.new-product')->with([
+            'product' => $product,
+            'units' => $units,
+            'categories' => $categories,
+        ]);
+    }
+
+    public function delete($id)
+    {
+    }
+
+    public function update(Request $request)
+    {
+    }
+    public function store(Request $request)
+    {
     }
 }

@@ -10,8 +10,10 @@ class RoleController extends Controller
     public function index()
     {
         return view('admin.roles.roles')->with([
-           // you can return data inline like this 
+           // you can return data inline like this
             'roles' => Role::all(),
         ]);
     }
+
+    // TODO make roles all functionality
 }

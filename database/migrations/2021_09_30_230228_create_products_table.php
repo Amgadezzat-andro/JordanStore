@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->text('description');
             $table->string('unit');
             $table->double('price');
-            $table->double('total');
+            $table->double('total')->default(0);
             $table->timestamps();
         });
     }

@@ -13,4 +13,8 @@ class StateController extends Controller
             'states' => $states
         ]);
     }
+
+        // TODO make State all functionality
+
 }
+

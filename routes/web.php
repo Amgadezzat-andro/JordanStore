@@ -10,6 +10,7 @@ use App\Models\Tag;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 // just for import the units data
 //Route::get('units-test','App\HTTP\Controllers\DataImportController@importUnits');
@@ -103,9 +104,22 @@ Route::group(
         Route::get('search-categories', 'App\HTTP\Controllers\CategoryController@search')->name('search-categories');
         Route::put('categories', 'App\HTTP\Controllers\CategoryController@update');
 
+
         //Products
         Route::get('products', 'App\HTTP\Controllers\ProductController@index')->name('products');
 
+        // ? is used because maybe there is new product which has no id
+        // ? means id here is optional
+        Route::get('new-product','App\HTTP\Controllers\ProductController@newProduct')->name('new-product');
+
+        Route::get('update-product/{id}','App\HTTP\Controllers\ProductController@newProduct')->name('update-product');
+
+
+        Route::put('update-product','App\HTTP\Controllers\ProductController@update')->name('update-product');
+
+        Route::post('new-product', 'App\HTTP\Controllers\ProductController@store');
+
+        Route::delete('products/{id}','App\HTTP\Controllers\ProductController@delete');
 
         //Tags
         Route::get('tags', 'App\HTTP\Controllers\TagController@index')->name('tags');
@@ -127,6 +141,12 @@ Route::group(
 
         //Cites
         Route::get('cities', 'App\HTTP\Controllers\CityController@index')->name('cities');
+        Route::post('cities', 'App\HTTP\Controllers\CityController@store');
+        Route::delete('cities', 'App\HTTP\Controllers\CityController@delete');
+        Route::get('search-cities', 'App\HTTP\Controllers\CityController@search')->name('search-cities');
+        Route::put('cities', 'App\HTTP\Controllers\CityController@update');
+
+
 
         //States
         Route::get('states', 'App\HTTP\Controllers\StateController@index')->name('states');

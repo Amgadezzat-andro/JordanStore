@@ -44,7 +44,7 @@ class CategoryController extends Controller
         $categoryName = $request->input('category_name');
 
         if ($this->categoryNameExists($categoryName)) {
-            Session::flash('message', 'category name already exists');
+            Session::flash('message', 'Category name already exists');
 
             // same as return redirect()->back()
             return back();
