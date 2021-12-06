@@ -27,24 +27,44 @@
 
                                         {!! count($product->images) > 0 ? '<img class="img-thumbnail card-img" src="' . $product->images[0]->url . '"/>' : '' !!}
 
+
                                         @if (!is_null($product->options))
-                                            <table class="table-bordered table">
-                                                @foreach ($product->jsonoptions() as $optionKey=>$options)
+
+                                            @foreach ($product->jsonoptions() as $key => $values)
+
+                                                <div class="row">
+                                                    <div class="form-group col-md-12">
+                                                        <label for="{{ $key }}">{{ $key }}</label>
+                                                        <select type="text" class="form-control" id="{{ $key }}"
+                                                            name="{{ $key }}">
+                                                            @foreach ($values as $value)
+                                                                <option value="{{ $value }}">{{ $value }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                            @endforeach
+
+                                            {{-- <table class="table-bordered table">
+                                                @foreach ($product->jsonoptions() as $optionKey => $options)
                                                     @foreach ($options as $option)
                                                         <tr>
-                                                            <td>{{$optionKey}}</td>
-                                                            <td>{{$option}}</td>
+                                                            <td>{{ $optionKey }}</td>
+                                                            <td>{{ $option }}</td>
                                                         </tr>
                                                     @endforeach
                                                 @endforeach
-                                            </table>
+                                            </table> --}}
 
                                         @endif
 
 
 
                                         <a class="btn btn-success mt-2"
-                                            href="{{ route('update-product', ['id' => $product->id]) }}"> Update Product</a>
+                                            href="{{ route('update-product', ['id' => $product->id]) }}"> Update
+                                            Product</a>
 
                                         {{-- <img src="{{ count($product->images) > 0 ? $product->images[0]->url : '' }}"
                                             alt="" class="img-thumbnail card-img"> --}}
