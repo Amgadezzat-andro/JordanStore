@@ -112,12 +112,14 @@ Route::group(
         // ? means id here is optional
         Route::get('new-product','App\HTTP\Controllers\ProductController@newProduct')->name('new-product');
 
+        Route::post('new-product', 'App\HTTP\Controllers\ProductController@store');
+
+
         Route::get('update-product/{id}','App\HTTP\Controllers\ProductController@newProduct')->name('update-product');
 
 
         Route::put('update-product','App\HTTP\Controllers\ProductController@update')->name('update-product');
 
-        Route::post('new-product', 'App\HTTP\Controllers\ProductController@store');
 
         Route::delete('products/{id}','App\HTTP\Controllers\ProductController@delete');
 

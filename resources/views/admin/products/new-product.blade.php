@@ -13,7 +13,7 @@
 
                 <div class="card-body">
 
-                    <form action="{{ route('update-product') }}" method="POST" class="row">
+                    <form action="{{ (!is_null($product)) ? route('update-product') : route('new-product')}}" method="POST" class="row">
                         @csrf
 
                         @if (!is_null($product))
@@ -28,12 +28,12 @@
 
                         <div class="form-group col-md-12">
                             <label for="product_description">Product Description</label>
-                            <textarea required class="form-control" name="product_description" id="product_description" cols="30" rows="10">{{ !is_null($product) ? $product->description : '' }}</textarea>
+                            <textarea placeholder="Product Description"  required class="form-control" name="product_description" id="product_description" cols="30" rows="10">{{ !is_null($product) ? $product->description : '' }}</textarea>
                         </div>
 
                         <div class="form-group col-md-12">
-                            <label for="product_unit">Product Category</label>
-                            <select class="form-control" name="product_unit" id="product_unit" required>
+                            <label for="product_category">Product Category</label>
+                            <select class="form-control" name="product_category" id="product_category" required>
                                 <option value="">Select A Category</option>
                                 @foreach ($categories as $category)
                                 <option value="{{ $category->id }}" {{ !is_null($product) && $product->category->id === $category->id ? 'selected' : '' }}>
@@ -60,28 +60,36 @@
 
                         <div class="form-group col-md-6">
                             <label for="product_price">Product Price</label>
-                            <input type="number" class="form-control" id="product_price" name="product_price" placeholder="Product Price" required value="{{ !is_null($product) ? $product->price : '' }}">
+                            <input type="number" step="any" class="form-control" id="product_price" name="product_price" placeholder="Product Price" required value="{{ !is_null($product) ? $product->price : '' }}">
                         </div>
 
                         <div class="form-group col-md-6">
                             <label for="product_discount">Product Discount</label>
-                            <input type="number" class="form-control" id="product_discount" name="product_discount" placeholder="Product Discount" required value="{{ !is_null($product) ? $product->discount : 0 }}">
+                            <input type="number" step="any" class="form-control" id="product_discount" name="product_discount" placeholder="Product Discount" required value="{{ !is_null($product) ? $product->discount : 0 }}">
                         </div>
 
                         <div class="form-group col-md-12">
                             <label for="product_total">Product Total</label>
-                            <input type="number" class="form-control" id="product_total" name="product_total" placeholder="Product Price" required value="{{ !is_null($product) ? $product->total : '' }}">
+                            <input type="number" step="any" class="form-control" id="product_total" name="product_total" placeholder="Product Price" required value="{{ !is_null($product) ? $product->total : '' }}">
                         </div>
 
                         {{-- Options --}}
                         <table id="options-table" class="table table-striped">
 
+
                         </table>
                         <div class="form-group col-md-12">
-                            <a class="btn btn-primary add-option-btn" href="#">Add Option</a>
+                            <a class="btn btn-outline-dark add-option-btn" href="#">Add Option</a>
 
                         </div>
                         {{-- /Options --}}
+
+
+                            <div class="form-group col-md-6 offset-md-3">
+                                <button type='submit' class="btn btn-primary btn-block">
+                                    Save
+                                </button>
+                            </div>
 
 
 
@@ -140,9 +148,11 @@
 
 <script>
     $(document).ready(function() {
+        var $optionNameList = [];
         var $optionWindow = $('#options-window');
         var $addOptionbtn = $('.add-option-btn');
         var $optionsTable = $('#options-table');
+        var optionNamesRow = '';
 
         $addOptionbtn.on('click', function(e) {
             e.preventDefault();
@@ -169,6 +179,15 @@
                 return false;
             }
 
+
+            if(!$optionNameList.includes($optionName.val())){
+                 $optionNameList.push($optionName.val());
+                 optionNamesRow = '<td><input type="hidden" name="options[]" value="'+$optionName.val()+'"></td>';
+            }
+
+
+
+
             var optionRow = `
             <tr>
             <td>
@@ -187,6 +206,12 @@
             $optionsTable.append(
                 optionRow
             );
+
+            $optionsTable.append(
+                optionNamesRow
+            );
+
+
 
             $optionValue.val('');
 
