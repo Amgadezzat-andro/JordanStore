@@ -10047,3 +10047,26 @@ span.product-header-title {
 a.remove-option {
   color: #eb4444;
 }
+
+a.activate-image-upload {
+  display: block;
+}
+
+.image-card-upload .card-body i {
+  font-size: 6rem;
+  color: #69b855;
+}
+
+.image-card-upload a.remove-image-upload {
+  font-size: 2rem;
+  color: #d80000;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 99999;
+  display: none;
+}
+
+input.image-file-upload {
+  display: none;
+}

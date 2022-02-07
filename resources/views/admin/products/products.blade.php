@@ -34,11 +34,11 @@
 
                                                 <div class="row">
                                                     <div class="form-group col-md-12">
-                                                        <label for="{{ $key }}">{{ $key }}</label>
+                                                        <label for="{{ $key }}">{{ strtoupper($key) }}</label>
                                                         <select type="text" class="form-control" id="{{ $key }}"
                                                             name="{{ $key }}">
                                                             @foreach ($values as $value)
-                                                                <option value="{{ $value }}">{{ $value }}
+                                                                <option value="{{ $value }}">{{ strtoupper($value) }}
                                                                 </option>
                                                             @endforeach
                                                         </select>

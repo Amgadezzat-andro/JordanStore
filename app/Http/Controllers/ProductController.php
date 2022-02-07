@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Image;
 use App\Models\Product;
 use App\Models\Unit;
 use Illuminate\Http\Request;
@@ -77,25 +78,37 @@ class ProductController extends Controller
         $product->discount = doubleval($request->input('product_discount'));
 
 
-            if($request->has('options')){
+        if ($request->has('options')) {
 
-                //$optionObject = new \stdClass();
-                $optionArray = [];
-                $options = array_unique($request->input('options'));
-                foreach($options as $option){
-                    $acutalOptions = $request->input($option);
-                    $optionArray[$option] =[];
-                    foreach($acutalOptions as $acutalOption){
-                        array_push($optionArray[$option],$acutalOption);
-                    }
+            //$optionObject = new \stdClass();
+            $optionArray = [];
+            $options = array_unique($request->input('options'));
+            foreach ($options as $option) {
+                $acutalOptions = $request->input($option);
+                $optionArray[$option] = [];
+                foreach ($acutalOptions as $acutalOption) {
+                    array_push($optionArray[$option], $acutalOption);
                 }
-
-                // convert json to text to store in database
-                $product->options = json_encode($optionArray);
-
             }
 
+            // convert json to text to store in database
+            $product->options = json_encode($optionArray);
+        }
+
+
+
         $product->save();
+
+        if ($request->hasFile('product_images')) {
+            $images = $request->file('product_images');
+            foreach ($images as $image) {
+                $path = $image->store('public');
+                $image = new Image();
+                $image->url = $path;
+                $image->product_id = $product->id;
+                $image->save();
+            }
+        }
         Session::flash('message', 'Product Has Been Added');
         return redirect(route('products'));
     }
