@@ -47,23 +47,13 @@
 
                                             @endforeach
 
-                                            {{-- <table class="table-bordered table">
-                                                @foreach ($product->jsonoptions() as $optionKey => $options)
-                                                    @foreach ($options as $option)
-                                                        <tr>
-                                                            <td>{{ $optionKey }}</td>
-                                                            <td>{{ $option }}</td>
-                                                        </tr>
-                                                    @endforeach
-                                                @endforeach
-                                            </table> --}}
 
                                         @endif
 
 
 
                                         <a class="btn btn-success mt-2"
-                                            href="{{ route('update-product', ['id' => $product->id]) }}"> Update
+                                            href="{{ route('update-product-form', ['id' => $product->id]) }}"> Update
                                             Product</a>
 
                                         {{-- <img src="{{ count($product->images) > 0 ? $product->images[0]->url : '' }}"

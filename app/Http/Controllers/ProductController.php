@@ -35,7 +35,8 @@ class ProductController extends Controller
         if (!is_null($id)) {
             $product = Product::with([
                 'hasUnit',
-                'category'
+                'category',
+                'images'
             ])->find($id);
         }
 
@@ -54,10 +55,6 @@ class ProductController extends Controller
 
     public function update(Request $request)
     {
-    }
-    public function store(Request $request)
-    {
-
         $request->validate([
             'product_title' => 'required',
             'product_description' => 'required',
@@ -68,7 +65,16 @@ class ProductController extends Controller
             'product_category' => 'required',
         ]);
 
-        $product = new Product();
+        $productID = $request->input('product_id');
+        $product = Product::find($productID);
+        $this->writeProduct($request, $product,true);
+        Session::flash('message', 'Product Has Been Added');
+        return back();
+    }
+
+    private function writeProduct(Request $request, Product $product, $update = false)
+    {
+
         $product->title = $request->input('product_title');
         $product->description = $request->input('product_description');
         $product->unit = intval($request->input('product_unit'));
@@ -100,6 +106,8 @@ class ProductController extends Controller
         $product->save();
 
         if ($request->hasFile('product_images')) {
+
+
             $images = $request->file('product_images');
             foreach ($images as $image) {
                 $path = $image->store('public');
@@ -109,6 +117,36 @@ class ProductController extends Controller
                 $image->save();
             }
         }
+
+        return $product;
+    }
+
+    public function deleteImage(Request $request)
+    {
+        $imageID = $request->input('image_id');
+        Image::destroy($imageID);
+    }
+
+
+
+
+
+
+    public function store(Request $request)
+    {
+
+        $request->validate([
+            'product_title' => 'required',
+            'product_description' => 'required',
+            'product_unit' => 'required',
+            'product_price' => 'required',
+            'product_discount' => 'required',
+            'product_total' => 'required',
+            'product_category' => 'required',
+        ]);
+
+        $product = new Product();
+        $this->writeProduct($request, $product);
         Session::flash('message', 'Product Has Been Added');
         return redirect(route('products'));
     }
