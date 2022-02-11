@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Resources\UserFullResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,6 +33,10 @@ Route::get('countries', 'App\HTTP\Controllers\Api\CountryController@index');
 Route::get('countries/{id}/states', 'App\HTTP\Controllers\Api\CountryController@showStates');
 Route::get('countries/{id}/cities', 'App\HTTP\Controllers\Api\CountryController@showCities');
 
+
+Route::get('users',function(){
+    return UserFullResource::collection(User::paginate());
+});
 
 
 
