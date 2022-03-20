@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
   {
     // create 500 random user
 
-    \App\Models\User::factory(500)->create();
+   // \App\Models\User::factory(500)->create();
     // \App\Models\Address::factory(500)->create();
     //\App\Models\Product::factory(1500)->create();
     //  \App\Models\Image::factory(3500)->create();
