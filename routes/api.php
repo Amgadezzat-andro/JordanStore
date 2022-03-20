@@ -40,14 +40,15 @@ Route::get('countries/{id}/cities', 'App\HTTP\Controllers\Api\CountryController@
 
 
 
- Route::post('auth/register','App\HTTP\Controllers\Api\AuthController@register');
-Route::post('auth/login','App\HTTP\Controllers\Api\AuthController@login');
+Route::post('auth/register', 'App\HTTP\Controllers\Api\AuthController@register');
+Route::post('auth/login', 'App\HTTP\Controllers\Api\AuthController@login');
 
 
 
 
 Route::group(['auth:api'], function () {
 
-    //get full products
+    // During Work
+
 
 });
