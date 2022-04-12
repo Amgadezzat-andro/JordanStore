@@ -37,11 +37,19 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
+
+        dd($request);
+
         $request->validate([
             'category_name' => 'required',
+            'category_image' => 'required',
+            'image_direction' => 'required',
         ]);
 
+        // check in the request for category_name
         $categoryName = $request->input('category_name');
+
+        // check if category name exists before
 
         if ($this->categoryNameExists($categoryName)) {
             Session::flash('message', 'Category name already exists');
@@ -49,10 +57,26 @@ class CategoryController extends Controller
             // same as return redirect()->back()
             return back();
         }
+        // make new instance of the model
         $category = new Category();
+
+        // fillin th data name , directio , image
         $category->name = $categoryName;
+        $category->image_direction = $request->input('image_direction');
+        if ($request->hasFile('category_image')) {
+            $image = $request->file('category_image');
+            $path = $image->store('public');
+            $category->image_url = $path;
+        }
+
+        // save the category now
         $category->save();
+
+
         Session::flash('message', 'category has been added');
+
+
+
         return back();
     }
 
