@@ -11,9 +11,10 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        return CategoryResource::collection(Category::paginate());
+        return CategoryResource::collection(Category::all());
     }
-    public function show($id){
+    public function show($id)
+    {
         return new CategoryResource(Category::find($id));
     }
 }
