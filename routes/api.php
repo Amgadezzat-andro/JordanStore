@@ -18,30 +18,31 @@ use Illuminate\Support\Facades\Route;
 */
 
 //Get Categories
-Route::get('categories', 'App\HTTP\Controllers\Api\CategoryController@index');
-Route::get('categories/{id}', 'App\HTTP\Controllers\Api\CategoryController@show');
+Route::get('categories', 'Api\CategoryController@index');
+Route::get('categories/{id}', 'Api\CategoryController@show');
 
 //Get Tags
-Route::get('tags', 'App\HTTP\Controllers\Api\TagController@index');
-Route::get('tags/{id}', 'App\HTTP\Controllers\Api\TagController@show');
+Route::get('tags', 'Api\TagController@index');
+Route::get('tags/{id}', 'Api\TagController@show');
 //Get Products
-Route::get('products', 'App\HTTP\Controllers\Api\ProductController@index');
-Route::get('products/{id}', 'App\HTTP\Controllers\Api\ProductController@show');
+Route::get('products', 'Api\ProductController@index');
+Route::get('products/{id}', 'Api\ProductController@show');
 
 //General Route
-Route::get('countries', 'App\HTTP\Controllers\Api\CountryController@index');
-Route::get('countries/{id}/states', 'App\HTTP\Controllers\Api\CountryController@showStates');
-Route::get('countries/{id}/cities', 'App\HTTP\Controllers\Api\CountryController@showCities');
+Route::get('countries', 'Api\CountryController@index');
+Route::get('countries/{id}/states', 'Api\CountryController@showStates');
+Route::get('countries/{id}/cities', 'Api\CountryController@showCities');
 
 
 
-// Route::post('auth/register','App\HTTP\Controllers\Api\UserController@register');
-// Route::post('auth/login','App\HTTP\Controllers\Api\UserController@login');
+
+// Route::post('auth/register','Api\UserController@register');
+// Route::post('auth/login','Api\UserController@login');
 
 
 
-Route::post('auth/register', 'App\HTTP\Controllers\Api\AuthController@register');
-Route::post('auth/login', 'App\HTTP\Controllers\Api\AuthController@login');
+Route::post('auth/register', 'Api\AuthController@register');
+Route::post('auth/login', 'Api\AuthController@login');
 
 
 
