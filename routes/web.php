@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 // just for import the units data
-//Route::get('units-test','App\HTTP\Controllers\DataImportController@importUnits');
+//Route::get('units-test','DataImportController@importUnits');
 
 // Route::get('userRole-test', function () {
 //     $role = Role::find(1);
@@ -74,7 +74,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::group(
     ['auth', 'user_is_admin'],
@@ -83,53 +83,53 @@ Route::group(
         //Units
 
         //Get  Unit Data
-        Route::get('units', 'App\HTTP\Controllers\UnitController@index')->name('units');
+        Route::get('units', 'UnitController@index')->name('units');
         //Post Add Unit
-        Route::post('units', 'App\HTTP\Controllers\UnitController@store');
+        Route::post('units', 'UnitController@store');
         // Delete Unit
-        Route::delete('units', 'App\HTTP\Controllers\UnitController@delete');
+        Route::delete('units', 'UnitController@delete');
         //Update Unit
-        Route::put('units', 'App\HTTP\Controllers\UnitController@update');
+        Route::put('units', 'UnitController@update');
         // Search for unit
         // laravel knows that this will be dynamic value
-        Route::get('search-unit', 'App\HTTP\Controllers\UnitController@search')->name('search-units');
+        Route::get('search-unit', 'UnitController@search')->name('search-units');
 
 
 
 
         // Categories
-        Route::get('categories', 'App\HTTP\Controllers\CategoryController@index')->name('categories');
-        Route::post('categories', 'App\HTTP\Controllers\CategoryController@store');
-        Route::delete('categories', 'App\HTTP\Controllers\CategoryController@delete');
-        Route::get('search-categories', 'App\HTTP\Controllers\CategoryController@search')->name('search-categories');
-        Route::put('categories', 'App\HTTP\Controllers\CategoryController@update');
+        Route::get('categories', 'CategoryController@index')->name('categories');
+        Route::post('categories', 'CategoryController@store');
+        Route::delete('categories', 'CategoryController@delete');
+        Route::get('search-categories', 'CategoryController@search')->name('search-categories');
+        Route::put('categories', 'CategoryController@update');
 
 
         //Products
-        Route::get('products', 'App\HTTP\Controllers\ProductController@index')->name('products');
+        Route::get('products', 'ProductController@index')->name('products');
 
         // ? is used because maybe there is new product which has no id
         // ? means id here is optional
-        Route::get('new-product','App\HTTP\Controllers\ProductController@newProduct')->name('new-product');
+        Route::get('new-product','ProductController@newProduct')->name('new-product');
 
-        Route::post('new-product', 'App\HTTP\Controllers\ProductController@store');
+        Route::post('new-product', 'ProductController@store');
 
-        Route::get('update-product/{id}','App\HTTP\Controllers\ProductController@newProduct')->name('update-product-form');
-
-
-        Route::put('update-product','App\HTTP\Controllers\ProductController@update')->name('update-product');
+        Route::get('update-product/{id}','ProductController@newProduct')->name('update-product-form');
 
 
-        Route::delete('products/{id}','App\HTTP\Controllers\ProductController@delete');
+        Route::put('update-product','ProductController@update')->name('update-product');
 
-        Route::post('delete-image','App\HTTP\Controllers\ProductController@deleteImage')->name('delete-image');
+
+        Route::delete('products/{id}','ProductController@delete');
+
+        Route::post('delete-image','ProductController@deleteImage')->name('delete-image');
 
         //Tags
-        Route::get('tags', 'App\HTTP\Controllers\TagController@index')->name('tags');
-        Route::post('tags', 'App\HTTP\Controllers\TagController@store');
-        Route::delete('tags', 'App\HTTP\Controllers\TagController@delete');
-        Route::get('search-tags', 'App\HTTP\Controllers\TagController@search')->name('search-tags');
-        Route::put('tags', 'App\HTTP\Controllers\TagController@update');
+        Route::get('tags', 'TagController@index')->name('tags');
+        Route::post('tags', 'TagController@store');
+        Route::delete('tags', 'TagController@delete');
+        Route::get('search-tags', 'TagController@search')->name('search-tags');
+        Route::put('tags', 'TagController@update');
 
 
 
@@ -140,30 +140,30 @@ Route::group(
 
 
         //Countires
-        Route::get('countries', 'App\HTTP\Controllers\CountryController@index')->name('countries');
+        Route::get('countries', 'CountryController@index')->name('countries');
 
         //Cites
-        Route::get('cities', 'App\HTTP\Controllers\CityController@index')->name('cities');
-        Route::post('cities', 'App\HTTP\Controllers\CityController@store');
-        Route::delete('cities', 'App\HTTP\Controllers\CityController@delete');
-        Route::get('search-cities', 'App\HTTP\Controllers\CityController@search')->name('search-cities');
-        Route::put('cities', 'App\HTTP\Controllers\CityController@update');
+        Route::get('cities', 'CityController@index')->name('cities');
+        Route::post('cities', 'CityController@store');
+        Route::delete('cities', 'CityController@delete');
+        Route::get('search-cities', 'CityController@search')->name('search-cities');
+        Route::put('cities', 'CityController@update');
 
 
 
         //States
-        Route::get('states', 'App\HTTP\Controllers\StateController@index')->name('states');
+        Route::get('states', 'StateController@index')->name('states');
 
 
         //Reviews
-        Route::get('reviews', 'App\HTTP\Controllers\ReviewController@index')->name('reviews');
+        Route::get('reviews', 'ReviewController@index')->name('reviews');
 
         //Tickets
-        Route::get('tickets', 'App\HTTP\Controllers\TicketController@index')->name('tickets');
+        Route::get('tickets', 'TicketController@index')->name('tickets');
 
 
 
         //Roles
-        Route::get('roles', 'App\HTTP\Controllers\RoleController@index')->name('roles');
+        Route::get('roles', 'RoleController@index')->name('roles');
     }
 );
