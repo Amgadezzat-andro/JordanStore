@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 //Get Categories
 Route::get('categories', 'App\HTTP\Controllers\Api\CategoryController@index');
 Route::get('categories/{id}', 'App\HTTP\Controllers\Api\CategoryController@show');
+Route::get('categories/{id}/products','App\HTTP\Controllers\Api\CategoryController@products');
 
 //Get Tags
 Route::get('tags', 'App\HTTP\Controllers\Api\TagController@index');
