@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 //Get Categories
 Route::get('categories', 'App\HTTP\Controllers\Api\CategoryController@index');
 Route::get('categories/{id}', 'App\HTTP\Controllers\Api\CategoryController@show');
-Route::get('categories/{id}/products','App\HTTP\Controllers\Api\CategoryController@products');
+Route::get('categories/{id}/products', 'App\HTTP\Controllers\Api\CategoryController@products');
 
 //Get Tags
 Route::get('tags', 'App\HTTP\Controllers\Api\TagController@index');
@@ -46,10 +46,7 @@ Route::post('auth/login', 'App\HTTP\Controllers\Api\AuthController@login');
 
 
 
+Route::group(['middleware' => 'auth:api'], function () {
 
-Route::group(['auth:api'], function () {
-
-    // During Work
-
-
+    Route::post('carts', 'App\HTTP\Controllers\Api\CartController@addProductToCart');
 });

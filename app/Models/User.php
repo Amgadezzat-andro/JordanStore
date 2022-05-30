@@ -88,6 +88,9 @@ class User extends Authenticatable
     public function roles(){
         return $this->belongsToMany(Role::class);
     }
+    public function cart(){
+        return $this->hasOne(Cart::class);
+    }
 
 
     // in the view When you do $reviews->customer->formattedName,

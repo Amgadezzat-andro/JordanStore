@@ -3,10 +3,18 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
-class CartItem extends Model
+
+class CartItem
 {
     use HasFactory;
-    
+
+
+    public $product;
+    public $qty;
+    public function __construct(Product $product, $qty)
+    {
+        $this->product = $product;
+        $this->qty = $qty;
+    }
 }
