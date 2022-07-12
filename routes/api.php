@@ -49,4 +49,8 @@ Route::post('auth/login', 'App\HTTP\Controllers\Api\AuthController@login');
 Route::group(['middleware' => 'auth:api'], function () {
 
     Route::post('carts', 'App\HTTP\Controllers\Api\CartController@addProductToCart');
+
+    Route::post('carts/{id}/remove', 'App\HTTP\Controllers\Api\CartController@removeProductFromCart');
+
+    Route::get('carts','App\HTTP\Controllers\Api\CartController@index');
 });

@@ -36,8 +36,40 @@ class Cart extends Model
         $cartItem = new CartItem($product, $qty);
         array_push($cartItems, $cartItem);
         $this->cart_items = json_encode($cartItems);
-        return $cartItems;
+        $temptotal = 0;
+        foreach ($cartItems as $cartItem) {
+            $temptotal += ($cartItem->qty * $cartItem->product->price);
+        }
+        $this->total = $temptotal;
+
+        // return $cartItems;
     }
+
+    public function decreaseProduct(Product $product)
+    {
+        $cartItems = $this->cart_items;
+        if (is_null($cartItems)) {
+            $cartItems = [];
+        } else {
+            if (!is_array($cartItems)) {
+                $cartItems = json_decode($cartItems);
+            }
+        }
+        foreach ($cartItems as $cartItem) {
+            if ($cartItem->product->id === $product->id) {
+                $cartItem->qty--;
+                
+            }
+        }
+        $this->cart_items = json_encode($cartItems);
+
+        $temptotal = 0;
+        foreach ($cartItems as $cartItem) {
+            $temptotal += ($cartItem->qty * $cartItem->product->price);
+        }
+        $this->total = $temptotal;
+    }
+
 
     public function increaseProductInCart(Product $product, $qty = 1)
     {
@@ -55,9 +87,13 @@ class Cart extends Model
             }
         }
         $this->cart_items = json_encode($cartItems);
+
+        $temptotal = 0;
+        foreach ($cartItems as $cartItem) {
+            $temptotal += ($cartItem->qty * $cartItem->product->price);
+        }
+        $this->total = $temptotal;
     }
-
-
 
     public function inItems($product_id)
     {

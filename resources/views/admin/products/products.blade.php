@@ -24,7 +24,7 @@
 
                                         <p>Price: {{ $currency_code }} {{ $product->price }} </p>
 
-                                        @php
+                                        {{-- @php
                                             $imageUrl = '';
                                             if (count($product->images > 0)) {
                                                 if (strpos($product->images[0]->url, 'https') !== false || strpos($product->images[0], 'http') !== false) {
@@ -33,7 +33,7 @@
                                                     $imageUrl = asset('storage/' . $product->images[0]->url);
                                                 }
                                             }
-                                        @endphp
+                                        @endphp --}}
 
 
 
